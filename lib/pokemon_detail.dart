@@ -23,31 +23,45 @@ class PokeDetail extends StatelessWidget {
               SizedBox(height: 120.0,),
               Text(pokemon.name,
                 style: TextStyle(fontSize: 20.0,
-                  fontWeight: FontWeight.bold),),
+                  fontWeight: FontWeight.w800),),
               Text("Height : ${pokemon.height}"),
               Text("Weight : ${pokemon.weight}"),
-              Text("Types",
-                  style : TextStyle(fontWeight: FontWeight.bold)),
+              Text("Types", style : TextStyle(fontWeight: FontWeight.w800)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: pokemon.type.map((t) => FilterChip(
                     backgroundColor: Colors.amber,
                     label: Text(t), onSelected: (b){})).toList(),
               ),
-              Text("Weakness"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: pokemon.weaknesses.map((t) => FilterChip(
-                  backgroundColor: Colors.red,
-                    label: Text(t, style: TextStyle(color: Colors.white),
+              Container(
+                  child: Column(
+                        children: <Widget>[
+                    Text("Weakness", style: TextStyle(fontWeight: FontWeight.w800),),
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: pokemon.weaknesses.map((t) => FilterChip(
+                    backgroundColor: Colors.red,
+                    label: Text(t, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                     ), onSelected: (b){})).toList(),
-              ),
-              Text("Next Evolution", style: TextStyle(fontWeight: FontWeight.bold),),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: pokemon.nextEvolution.map((n) => FilterChip(
-                    label: Text(n.name, style: TextStyle(color: Colors.white),
-                    ), onSelected: (b){})).toList(),
+                      ),
+                      ],
+                    ),
+                  ),
+              pokemon.nextEvolution == null ? Container(
+                child: Text("Final Evolution", style: TextStyle(fontWeight: FontWeight.w800),),
+              ) : Container(
+                child: Column(
+                  children: <Widget>[
+                    Text("Next Evolution", style: TextStyle(fontWeight: FontWeight.w800),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: pokemon.nextEvolution.map((n) => FilterChip(
+                        backgroundColor: Colors.yellow[900],
+                          label: Text(n.name, style: TextStyle(fontWeight : FontWeight.bold, color: Colors.white),
+                          ), onSelected: (b){})).toList(),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -81,6 +95,4 @@ class PokeDetail extends StatelessWidget {
       body: bodyWidget(context),
     );
   }
-
 }
-//https://github.com/iampawan/PokemonApp/blob/master/lib/pokemondetail.dart

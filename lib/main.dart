@@ -1,97 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:home_app/pokemon.dart';
-import 'package:home_app/pokemon_detail.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:home_app/home.dart';
+import 'dart:async';
 
 void main() => runApp(MaterialApp(
   title: "Poke App",
-  home: HomePage(),
+  home: MyApp(),
   debugShowCheckedModeBanner: false,
 ));
 
-class HomePage extends StatefulWidget {
+class MyApp extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return HomePageState();
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: "Arial",
+        primaryColor: Colors.lightBlue,
+      ),
+      home: mainApp(),
+      routes: <String, WidgetBuilder> {
+        "home" : (BuildContext context) => new HomePage(),
+      },
+    );
   }
 
 }
+class mainApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return mainAppState();
+  }
+}
 
-class HomePageState extends State<HomePage> {
+class mainAppState extends State<mainApp> {
 
-  var url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
-  PokeHub pokeHub;
+  void navigateNextPage() {
+    Navigator.of(context).pushReplacementNamed("home");
+  }
+
+  startSplash() async {
+    return new Timer(Duration(milliseconds: 3000), navigateNextPage);
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchData();
-  }
-
-  fetchData() async {
-    var link = await http.get(url);
-    var decode = jsonDecode(link.body);
-    pokeHub = PokeHub.fromJson(decode);
-    print(pokeHub.toJson());
-    setState(() {
-
-    });
+    startSplash();
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Poke App"),
-        backgroundColor: Colors.cyan,
-      ),
-      body: pokeHub == null ? Center(
-        child: CircularProgressIndicator(),
-        ) : GridView.count(
-        crossAxisCount: 2,
-        children: pokeHub.pokemon.map((poke) => Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: InkWell (
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PokeDetail(
-                pokemon : poke,
-
-              )));
-            },
-            child: Card(
-              elevation: 3.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                    height: 100.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(poke.img))
-                    ),
-                  ),
-                  Text(
-                    poke.name,
-                    style: TextStyle(fontSize: 20.0,
-                        fontWeight: FontWeight.bold),),
-                  ],
-                ),
-              ),
-          ),
-        ))
-            .toList()
-      ),
-      drawer: Drawer(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        backgroundColor: Colors.cyan,
-        child: Icon(Icons.refresh),
-      ),
+    return Container(
+      child: Image.asset("assets/images/splash_screen.jpg", fit: BoxFit.fill,),
     );
   }
-  
+
 }
