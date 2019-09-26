@@ -58,5 +58,4 @@ class mainAppState extends State<mainApp> {
       child: Image.asset("assets/images/splash_screen.jpg", fit: BoxFit.fill,),
     );
   }
-
 }
