@@ -42,8 +42,7 @@ class PokeDetail extends StatelessWidget {
                     children: pokemon.weaknesses.map((t) => FilterChip(
                     backgroundColor: Colors.red,
                     label: Text(t, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                    ), onSelected: (b){})).toList(),
-                      ),
+                    ), onSelected: (b){})).toList(),),
                       ],
                     ),
                   ),
@@ -90,7 +89,6 @@ class PokeDetail extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.cyan,
         title: Text(pokemon.name),
-
       ),
       body: bodyWidget(context),
     );

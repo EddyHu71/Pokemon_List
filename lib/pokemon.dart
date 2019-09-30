@@ -1,7 +1,7 @@
 class PokeHub {
   List<Pokemon> pokemon;
 
-  PokeHub({this.pokemon});
+  //PokeHub({this.pokemon});
 
   PokeHub.fromJson(Map<String, dynamic> json) {
     if (json['pokemon'] != null) {
@@ -71,7 +71,7 @@ class Pokemon {
     spawnChance = json['spawn_chance'].toString();
     avgSpawns = json['avg_spawns'].toString();
     spawnTime = json['spawn_time'];
-    multipliers = json['multipliers']?.cast<double>();
+    multipliers = json['multipliers'].cast<double>();
     weaknesses = json['weaknesses'].cast<String>();
     if (json['next_evolution'] != null) {
       nextEvolution = new List<NextEvolution>();

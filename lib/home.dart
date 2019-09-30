@@ -56,7 +56,6 @@ class HomePageState extends State<HomePage> {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => PokeDetail(
                   pokemon : poke,
-
                 )));
               },
               child: Card(
@@ -79,8 +78,7 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ))
-              .toList()
+          )).toList()
       ),
       // drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
