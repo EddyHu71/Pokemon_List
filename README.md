@@ -1,8 +1,7 @@
-# home_app
+# Pokemon List
 
-A new Flutter application.
+Fetching from API.
 
-## Getting Started
+## Description
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Fetching from API : "https://raw.githubsercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json";
